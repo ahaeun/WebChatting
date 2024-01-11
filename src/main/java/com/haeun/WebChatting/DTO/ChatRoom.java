@@ -22,6 +22,7 @@ public class ChatRoom {
         this.name = name;
     }
 
+    //메세지 타입에 따라 session(클라이언트)에게 메시지를 전달히기 위한 메서드
     public void handleAction(WebSocketSession session, ChatDTO message, ChatService service) {
         // message 에 담긴 타입을 확인한다.
         // 이때 message 에서 getType 으로 가져온 내용이
@@ -39,6 +40,7 @@ public class ChatRoom {
         }
     }
 
+    //sessions에 담긴 모든 세션에 handleAction으로 부터 넘어온 메시지를 전달할 수 있도록 하는 메서드
     public <T> void sendMessage(T message, ChatService service) {
         sessions.parallelStream().forEach(session -> service.sendMessage(session, message));
     }

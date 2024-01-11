@@ -33,6 +33,7 @@ public class ChatService {
         return chatRooms.get(roomId);
     }
 
+    // UUID를 통해 랜덤으로 생성된 값으로 채팅방 아이디를 정함
     public ChatRoom createRoom(String name) {
         String roomId = UUID.randomUUID().toString(); // 랜덤한 방 아이디 생성
 
@@ -46,6 +47,7 @@ public class ChatService {
         return room;
     }
 
+    //지정된 세션에 메시지 발송
     public <T> void sendMessage(WebSocketSession session, T message) {
         try{
             session.sendMessage(new TextMessage(mapper.writeValueAsString(message)));
